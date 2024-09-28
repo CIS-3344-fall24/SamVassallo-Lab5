@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lab 5 - JavaScript</title>
+  </head>
+  <body>
+    <h1>Lab 5 - Working with Objects and Strings</h1>
+
+    <h2>Object Structure & Creating Objects - Tasks 1, 2, 3, 4</h2>
+    <button id="task1Button">Execute Task 1</button>
+    <button id="task2to5Button">Execute Tasks 2-4</button>
+    <div id="Tasks1-5"></div> 
+
+    <script>
+      
+      const student = {
+            name: "Alice",
+            age: 20,
+            grade: "A",
+            introduce: function() {
+                return `Hi, I am ${this.name} and I am ${this.age} years old.`;
+            }
+        };
+
+        
+        document.getElementById('task1Button').addEventListener('click', () => {
+            const initialMessage = student.introduce();
+            document.getElementById('Tasks1-5').innerHTML += `<p>${initialMessage}</p>`;
+        });
+
+     
+        document.getElementById('task2to5Button').addEventListener('click', () => {
+            
+            student.address = {
+                city: "New York",
+                country: "USA"
+            };
+
+         
+            student.major = "IS&T"; // New property
+            student.age = 21; // Update age
+
+           
+            const updatedMessage = `${student.introduce()} My major is ${student.major} and I live in ${student.address.city}, ${student.address.country}.`;
+            document.getElementById('Tasks1-5').innerHTML += `<p>${updatedMessage}</p>`; 
+
+            const accessInfo = `Name: ${student.name}, Grade: ${student.grade}`;
+            document.getElementById('Tasks1-5').innerHTML += `<p>${accessInfo}</p>`;
+        });
+
+  
+    </script>
+
+    <h2>Working with Strings - Task 5</h2>
+    <div id = "Task5"></div>
+    <script>
+      // Task 5: String Methods
+      // Write your code here
+      let message = " Hello, JavaScript! ";
+
+      let upper = message.toUpperCase();
+      let lower = message.toLowerCase();
+      let concatmess = message.concat("Its Saturday");
+      let trim = message.trim();
+      let trimStart = message.trimStart();
+      let trimEnd = message.trimEnd();
+      let padStart = message.padStart(25, ' ');
+      let padEnd = message.padEnd(25, ' ');
+      let repeat = message.repeat(4);
+      let replace = message.replace("Hello","Hiay");
+      let replaceAll = message.replaceAll(" ", "^");
+      let split = message.split(", ");
+      let indexOf = message.indexOf("J");
+      let lastIndex = message.lastIndexOf("!");
+      let serach = message.search("JavaScript");
+      let match = message.match(/JavaScript/);
+      let matchall = message.matchAll(/o/g);
+      let include = message.includes("Java");
+      let start = message.startsWith(" H");
+      let end = message.endsWith("! ");
+
+      document.getElementById('Task5').innerHTML = `
+            Uppercase: ${upper}<br>
+            Lowercase: ${lower}<br>
+            Concatenate: ${concatmess}<br>
+            Trim: ${trim}<br>
+            Trim Start: ${trimStart}<br>
+            Trim End: ${trimEnd}<br>
+            Padding Start: ${padStart}<br>
+            Padding End: ${padEnd}<br>
+            Repeat: ${repeat}<br>
+            Replace: ${replace}<br>
+            Replace All: ${replaceAll}<br>
+            Split: ${split}<br>
+            Index Of J: ${indexOf}<br>
+            Last Index: ${lastIndex}<br>
+            Search: ${serach}<br>
+            Match: ${match}<br>
+            Match All: ${matchall}<br>
+            Include: ${include}<br>
+            Start: ${start}<br>
+            End: ${end}<br>`;
+
+
+
+
+    </script>
+
+    <h2>If-Else Statements - Task 6</h2>
+    <input type="number" id="gradeInput" placeholder="Enter your grade">
+    <button id="checkGradeButton">Check Grade</button>
+    <div id="result"></div>
+
+    <script>
+      
+        function checkGrade(grade) {
+            if (grade > 90) {
+                console.log("Excellent");
+                document.getElementById('result').innerText = "Excellent";
+            } else if (grade >= 70 && grade < 90) {
+                console.log("Good");
+                document.getElementById('result').innerText = "Good";
+            } else {
+                console.log("Needs Improvement");
+                document.getElementById('result').innerText = "Needs Improvement";
+            }
+        }
+
+        document.getElementById('checkGradeButton').addEventListener('click', () => {
+            const grade = Number(document.getElementById('gradeInput').value);
+            checkGrade(grade);
+        });
+    </script>
+
+    <h2>For Loops - Task 7</h2>
+    <div id ="dec"></div>
+    <script>
+       
+      function createCounter(init) {
+            let currentValue = init;
+
+            return {
+                increment: function() {
+                    currentValue += 1;
+                    return currentValue;
+                },
+                decrement: function() {
+                    currentValue -= 1;
+                    return currentValue;
+                },
+                reset: function() {
+                    currentValue = init;
+                    return currentValue;
+                }
+            };
+        }
+
+      
+        function processCounterCalls(init, calls) {
+            const counter = createCounter(init);
+            const results = [];
+
+            for (let call of calls) {
+                if (typeof counter[call] === 'function') {
+                    results.push(counter[call]());
+                }
+            }
+
+            return results;
+        }
+
+        
+        const init = 5;
+            const calls = ["increment", "reset", "decrement"];
+            const output = processCounterCalls(init, calls);
+            document.getElementById('dec').innerText = `Output: [${output.join(', ')}]`;
+      
+     
+    </script>
+
+    <h2>Creating and Modifying Arrays - Tasks 8, 9, 10</h2>
+    <div id = "array"></div>
+    <script>
+      
+      
+      let fruits = ["apple", "banana", "orange"];
+        
+        
+        let firstFruit = fruits[0]; // First element
+        let lastFruit = fruits[fruits.length - 1]; // Last element
+
+        fruits.push("grape");
+        fruits.shift();
+
+        
+        document.getElementById('array').innerHTML = `
+            First fruit: ${firstFruit}<br>
+            Last fruit: ${lastFruit}<br>
+            Updated fruits array: [${fruits.join(', ')}]
+        `;
+
+    </script>
+
+    <h2>Library System - Task 11</h2>
+    <div id ="books"></div>
+    <script>
+      function Book(title, author, yearPublished, isAvailable) {
+            this.title = title;
+            this.author = author;
+            this.yearPublished = yearPublished;
+            this.isAvailable = isAvailable;
+
+            this.getDetails = function() {
+                return `Title: ${this.title}, Author: ${this.author}, Year: ${this.yearPublished}, Available: ${this.isAvailable ? "Yes" : "No"}`;
+            };
+        }
+
+        // Creating book objects
+        const book1 = new Book("The Hunger Games", "Suzanne Collins", 2008, true);
+        const book2 = new Book("The Fault in Our Stars", "John Green", 2012, true);
+        const book3 = new Book("Divergent", "Veronica Roth", 2011, true);
+    
+
+        // Array to store the books
+        const library = [book1, book2, book3];
+
+        // Function to borrow a book
+        function borrowBook(title) {
+            const book = library.find(b => b.title === title);
+            if (book) {
+                if (book.isAvailable) {
+                    book.isAvailable = false;
+                    return `You have successfully borrowed "${title}"`;
+                } else {
+                    return `Sorry, "${title}" is not available`;
+                }
+            } else {
+                return `Sorry, the book "${title}" does not exist in the library.`;
+            }
+        }
+
+        
+        let display = "";
+        display += book1.getDetails() + "<br>";
+        display += book2.getDetails() + "<br>";
+        display += book3.getDetails() + "<br><br>";
+
+        display += borrowBook("Divergent") + "<br>";
+        display += borrowBook("The Hunger Games") + "<br>";
+        display += borrowBook("The Fault in Our Stars") + "<br>"; 
+        display += borrowBook("Divergent") + "<br>"; + "<br>"; // Attempt to borrow again
+
+      
+        document.getElementById('books').innerHTML = display;
+
+    
+    </script>
+  </body>
+</html>
